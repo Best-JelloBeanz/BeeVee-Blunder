@@ -4,25 +4,16 @@ import entities.*;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 import utilz.TileManager;
-
 import javax.swing.JPanel;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
-import java.awt.Dimension;
-
-
 public class GamePanel extends JPanel{
-
     final int originalTileSize = 16;
     final int scale = 2;
     public final int tileSize = originalTileSize * scale;
     public final int maxWorldCol = 30;
     public final int maxWorldRow = 30;
-    public final int worldCol = tileSize * maxWorldCol;
-    public final int worldRow = tileSize * maxWorldRow;
-
     public float deltaTime;
-
     MouseInputs mouseI = new MouseInputs();
     public KeyboardInputs keyI = new KeyboardInputs();
     public Player player = new Player(this, keyI, 0, 0, 25, 30);
@@ -34,18 +25,9 @@ public class GamePanel extends JPanel{
         this.addMouseMotionListener(mouseI);
     }
 
-    private void setPanelSize() {
-        Dimension size = new Dimension(1280, 800);
-        setMinimumSize(size);
-        setPreferredSize(size);
-        setMaximumSize(size);
-    }
-
     public void updateGame() {
         player.update(deltaTime);
-
     }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
@@ -54,6 +36,5 @@ public class GamePanel extends JPanel{
         player.draw(g2);
         block.draw(g2);
         g2.dispose();
-
     }
 }

@@ -55,11 +55,11 @@ public class TileManager {
             int row = 0;
             while (col < gp.maxWorldCol  && row < gp.maxWorldRow) {
                 String line = br.readLine();
-
                 while (col < gp.maxWorldCol) {
                     String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
+                    //Creates a hitbox for each tile
                     e[col][row] = new Block(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                     col++;
                 }
@@ -81,8 +81,6 @@ public class TileManager {
             int tileNum = mapTileNum[worldCol][worldRow];
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
-            //int screenX = worldX - gp.player.worldX + gp.player.screenX;
-            //int screenY = worldY - gp.player.worldY + gp.player.screenY;
             if (tileNum > 0) {
                 g2.drawImage(tile[tileNum].image, worldX, worldY, gp.tileSize, gp.tileSize, null);
                 if (gp.keyI.hitboxVisible) {
@@ -94,15 +92,6 @@ public class TileManager {
                 worldRow++;
                 worldCol = 0;
             }
-
-            /*
-            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-            }
-            */
         }
     }
 }

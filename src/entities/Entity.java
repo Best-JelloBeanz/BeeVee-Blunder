@@ -8,16 +8,12 @@ public abstract class Entity {
     public float x, y, velocityX, velocityY, accelerationY, accelerationX, deceleration;
     public float maxVelocityY, maxVelocityX;
     protected int width, height;
-    public boolean grounded = false;
     public boolean canMoveLeft = true;
     public boolean canMoveRight = true;
     public Rectangle hitbox;
-
     public BufferedImage right, left;
     public String direction;
-    public int spriteCounter = 0;
-    public int spriteNum = 1;
-
+    //Entity constructor
     protected Entity(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -38,7 +34,7 @@ public abstract class Entity {
         hitbox.y = (int) y + 1;
     }
 
-
+    //Leftover code from first testing phase
     protected void isColliding(Entity rec1, Entity rec2) {
         if (rec1.hitbox.intersects(rec2.hitbox)) {
             if (rec1.x >= rec2.x + (rec2.width / 2)) {

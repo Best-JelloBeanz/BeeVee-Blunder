@@ -7,23 +7,24 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import main.Game;
-import utilz.TileManager;
 
 public class Player extends Entity{
     KeyboardInputs keyI;
     GamePanel gp;
-    Game game;
-
-
+    //The Player constructor
     public Player(GamePanel gp, KeyboardInputs keyI, float x, float y, int width, int height) {
         super(x, y, width, height);
+        //I know how this works and why I need this, but I can't describe it very well.
         this.gp = gp;
+        //Loads keyboard input functionality
         this.keyI = keyI;
         setDefaultValues();
+        //Loads the player sprites
         importImg();
+        //Creates a new instance of hitbox for the player to use
         initHitbox();
     }
+    //Only needs to be called once, gives initial values for the player to spawn with
     public void setDefaultValues() {
         x = 100;
         y = 100;
@@ -34,6 +35,7 @@ public class Player extends Entity{
         maxVelocityY = 300;
         direction = "right";
     }
+    //Only needs to be called once, loads player sprites
     private void importImg() {
         InputStream l = getClass().getResourceAsStream("/res/BeeVee_left.png");
         InputStream r = getClass().getResourceAsStream("/res/BeeVee_right.png");
@@ -51,17 +53,18 @@ public class Player extends Entity{
             }
         }
     }
+    //Updates player position when called
     private void updatePos(float deltaTime) {
-        // update the player's position based on the input...
         if (keyI.spacePressed) {
+            //
             velocityY -= 1.5 * accelerationY * deltaTime;
         }
         else {
-            // Update the player's position based on the velocity
             if (velocityY < 0) {
                 velocityY += 1.5 * accelerationY * deltaTime;
             }
             velocityY += accelerationY * deltaTime;
+            //If not exceeding maximum velocity in the up or down directions
             if (velocityY > maxVelocityY || velocityY < -maxVelocityY) {
                 if (velocityY > 0) {
                     velocityY = maxVelocityY;
@@ -70,6 +73,7 @@ public class Player extends Entity{
                     velocityY = -maxVelocityY;
                 }
             }
+            //Update y position
             y += velocityY * deltaTime;
         }
         if (keyI.leftPressed) {
@@ -84,8 +88,8 @@ public class Player extends Entity{
                 velocityX += accelerationX * deltaTime;
             }
         }
+        //Decelerate the player if the left and right keys are not pressed
         else {
-            // Decelerate the player if the left and right keys are not pressed
             if (velocityX > 0) {
                 if (!canMoveLeft) {
                     velocityX = 0;
@@ -113,6 +117,7 @@ public class Player extends Entity{
         x += velocityX * deltaTime;
 
     }
+    //Checks for tile collisions and executes collision rules accordingly when called
     public void TileCollision() {
         int worldCol = 0;
         int worldRow = 0;
@@ -126,15 +131,20 @@ public class Player extends Entity{
                 worldRow++;
                 worldCol = 0;
             }
+            //If tile is grass
             if (tileNum == 1) {
                 if (a.hitbox.intersects(b.hitbox)) {
+                    //If to the right of the tile
                     if (a.x >= b.x + (b.width / 2)) {
                         canMoveLeft = false;
+                        //Prevents player from maintaining momentum when turning around.
                         a.velocityX = 0;
                         a.x = b.x + b.width -3;
                     }
+                    //If to the left of the tile
                     if ((a.x + a.width) <= b.x + (b.width / 2)) {
                         canMoveRight = false;
+                        //Prevents player from maintaining momentum when turning around
                         a.velocityX = 0;
                         a.x = b.x - a.width - 2;
                     }
@@ -144,11 +154,15 @@ public class Player extends Entity{
                     canMoveRight = true;
                 }
             }
+            //If tile is brick
             if (tileNum == 2) {
                 if (a.hitbox.intersects(b.hitbox)) {
+                    //If colliding, and not standing on the tile
                     if (a.y > b.y - a.height) {
                         a.y = b.y - a.height;
                     }
+                    //Resets velocity so momentum is not carried when walking off
+                    //Does not reset if velocity goes upwards to make jumping possible
                     if (a.velocityY > 0) {
                         a.velocityY = 0;
                     }
@@ -156,15 +170,15 @@ public class Player extends Entity{
             }
         }
     }
+    //Updates the player when called
     public void update(float deltaTime) {
         updatePos(deltaTime);
         updateHitbox();
-
         TileCollision();
         isColliding(gp.player, gp.block);
 
     }
-
+    //Draws the character when called
     public void draw(Graphics2D g2) {
         BufferedImage img = null;
         switch(direction) {
@@ -172,6 +186,7 @@ public class Player extends Entity{
             case "left" -> img = left;
         }
         g2.drawImage(img, (int)x, (int)y, null);
+        //Debug hitbox
         if (keyI.hitboxVisible) {
             drawHitbox(g2);
         }

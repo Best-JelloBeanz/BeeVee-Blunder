@@ -9,21 +9,17 @@ public class Game implements Runnable{
     private GameWindow gameWindow;
     private Thread gameThread;
     public static final int FPS_SET = 120;
-
     public Game() {
         gamePanel = new GamePanel();
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
         startGameLoop();
-
     }
     private void startGameLoop() {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
-
-
+    //Run operation, handles framerate and repainting
     @Override
     public void run() {
         double timePerFrame = 1000000000.0 / FPS_SET;

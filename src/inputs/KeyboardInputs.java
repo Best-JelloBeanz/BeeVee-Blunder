@@ -5,10 +5,9 @@ import java.awt.event.KeyListener;
 
 public class KeyboardInputs implements KeyListener {
 
-public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, hitboxVisible;
+public boolean leftPressed, rightPressed, spacePressed, hitboxVisible;
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) {}
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -25,7 +24,6 @@ public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed, 
             hitboxVisible = !hitboxVisible;
         }
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

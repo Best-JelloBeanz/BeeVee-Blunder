@@ -1,6 +1,5 @@
 package main;
 //Window operations
-
 import javax.swing.JFrame;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
@@ -10,11 +9,10 @@ public class GameWindow extends JFrame {
         jframe = new JFrame();
         jframe.setSize(gamePanel.tileSize * gamePanel.maxWorldCol, gamePanel.tileSize * gamePanel.maxWorldRow);
         jframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         jframe.setResizable(false);
         jframe.setTitle("Hi");
         jframe.add(gamePanel);
-        jframe.setLocationRelativeTo(null);//jframe spawns at screen center
+        jframe.setLocationRelativeTo(null); //jframe spawns at screen center
         jframe.setVisible(true);
         jframe.addWindowFocusListener(new WindowFocusListener() {
             @Override
