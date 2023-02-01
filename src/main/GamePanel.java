@@ -29,9 +29,6 @@ public class GamePanel extends JPanel{
     public TileManager tileM = new TileManager(this);
     public Block block = new Block(this, 200, 200, 32, 32);
     public GamePanel() {
-        //mouseInputs = new MouseInputs(this);
-        //importImg();
-        //setPanelSize();
         this.addKeyListener(keyI);
         this.addMouseListener(mouseI);
         this.addMouseMotionListener(mouseI);

@@ -85,7 +85,7 @@ public class Player extends Entity{
             }
         }
         else {
-            // Decelerate the player if the left or right keys are not pressed
+            // Decelerate the player if the left and right keys are not pressed
             if (velocityX > 0) {
                 if (!canMoveLeft) {
                     velocityX = 0;
@@ -100,6 +100,7 @@ public class Player extends Entity{
                 if (velocityX > 0) velocityX = 0;
             }
         }
+        //Prevents the player from going above maxVelocityX
         if (velocityX > maxVelocityX || velocityX < -maxVelocityX) {
             if (velocityX > 0) {
                 velocityX = maxVelocityX;
@@ -108,6 +109,7 @@ public class Player extends Entity{
                 velocityX = -maxVelocityX;
             }
         }
+        //Movement
         x += velocityX * deltaTime;
 
     }
@@ -115,25 +117,41 @@ public class Player extends Entity{
         int worldCol = 0;
         int worldRow = 0;
         //Loops through the map, and acquires the data from it
+        Player a = gp.player;
         while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
             int tileNum = gp.tileM.mapTileNum[worldCol][worldRow];
+            Block b = gp.tileM.e[worldCol][worldRow];
             worldCol++;
             if (worldCol == gp.maxWorldCol) {
                 worldRow++;
                 worldCol = 0;
             }
-            if (tileNum == 2) {
-                if (gp.player.hitbox.intersects(gp.tileM.e[worldCol][worldRow].hitbox)) {
-                    if (gp.player.y > gp.tileM.e[worldCol][worldRow].y - gp.player.height) {
-                        gp.player.y = gp.tileM.e[worldCol][worldRow].y - gp.player.height;
+            if (tileNum == 1) {
+                if (a.hitbox.intersects(b.hitbox)) {
+                    if (a.x >= b.x + (b.width / 2)) {
+                        canMoveLeft = false;
+                        a.velocityX = 0;
+                        a.x = b.x + b.width -3;
                     }
-                    if (gp.player.velocityY > 0) {
-                        gp.player.velocityY = 0;
+                    if ((a.x + a.width) <= b.x + (b.width / 2)) {
+                        canMoveRight = false;
+                        a.velocityX = 0;
+                        a.x = b.x - a.width - 2;
                     }
-                    gp.player.grounded = true;
                 }
                 else {
-                    gp.player.grounded = false;
+                    canMoveLeft = true;
+                    canMoveRight = true;
+                }
+            }
+            if (tileNum == 2) {
+                if (a.hitbox.intersects(b.hitbox)) {
+                    if (a.y > b.y - a.height) {
+                        a.y = b.y - a.height;
+                    }
+                    if (a.velocityY > 0) {
+                        a.velocityY = 0;
+                    }
                 }
             }
         }
