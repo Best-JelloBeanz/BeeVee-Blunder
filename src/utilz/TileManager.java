@@ -1,6 +1,5 @@
 package utilz;
 import entities.Block;
-import entities.Entity;
 import main.GamePanel;
 
 
@@ -10,8 +9,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.awt.Rectangle;
+import java.util.Objects;
 
+//Original by RYI Snow (Modified)
 public class TileManager {
     GamePanel gp;
     public Tile[] tile;
@@ -29,20 +29,20 @@ public class TileManager {
         try {
             //This tile is never used, it's just a placeholder for air
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/grass.png"));
+            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/grass.png")));
 
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/grass.png"));
+            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/grass.png")));
 
             tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/bricks.png"));
+            tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/bricks.png")));
             tile[2].collision = true;
 
             tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/water.png"));
+            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/water.png")));
 
             tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/lava.png"));
+            tile[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/lava.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,6 +50,7 @@ public class TileManager {
     public void loadMap(String filepath) {
         try {
             InputStream is = getClass().getResourceAsStream(filepath);
+            assert is != null;
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             int col = 0;
             int row = 0;
@@ -70,6 +71,7 @@ public class TileManager {
             }
             br.close();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     //draws the defined tiles

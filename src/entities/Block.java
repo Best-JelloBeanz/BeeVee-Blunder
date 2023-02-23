@@ -1,12 +1,12 @@
 package entities;
 import java.awt.*;
 import main.GamePanel;
+//
 public class Block extends Entity{
     GamePanel gp;
     public Block(GamePanel gp, float x, float y, int width, int height) {
         super(x, y, width, height);
         this.gp = gp;
-        setDefaultValues();
         initHitbox();
     }
     public void setDefaultValues() {

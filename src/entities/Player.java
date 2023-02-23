@@ -37,16 +37,21 @@ public class Player extends Entity{
     }
     //Only needs to be called once, loads player sprites
     private void importImg() {
+        //Original sprite images
         InputStream l = getClass().getResourceAsStream("/res/BeeVee_left.png");
         InputStream r = getClass().getResourceAsStream("/res/BeeVee_right.png");
         try{
+            assert r != null;
             right = ImageIO.read(r);
+            assert l != null;
             left = ImageIO.read(l);
         }catch (IOException e) {
             e.printStackTrace();
         }finally {
             try {
+                assert r != null;
                 r.close();
+                assert l != null;
                 l.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -118,6 +123,7 @@ public class Player extends Entity{
 
     }
     //Checks for tile collisions and executes collision rules accordingly when called
+    //Original
     public void TileCollision() {
         int worldCol = 0;
         int worldRow = 0;
@@ -135,6 +141,7 @@ public class Player extends Entity{
             if (tileNum == 1) {
                 if (a.hitbox.intersects(b.hitbox)) {
                     //If to the right of the tile
+                    //noinspection IntegerDivisionInFloatingPointContext
                     if (a.x >= b.x + (b.width / 2)) {
                         canMoveLeft = false;
                         //Prevents player from maintaining momentum when turning around.
@@ -142,6 +149,7 @@ public class Player extends Entity{
                         a.x = b.x + b.width -3;
                     }
                     //If to the left of the tile
+                    //noinspection IntegerDivisionInFloatingPointContext
                     if ((a.x + a.width) <= b.x + (b.width / 2)) {
                         canMoveRight = false;
                         //Prevents player from maintaining momentum when turning around
@@ -162,10 +170,10 @@ public class Player extends Entity{
                         a.y = b.y - a.height;
                     }
                     //Resets velocity so momentum is not carried when walking off
-                    //Does not reset if velocity goes upwards to make jumping possible
                     if (a.velocityY > 0) {
                         a.velocityY = 0;
                     }
+                    //Does not reset if velocity goes upwards to make jumping possible
                 }
             }
         }
