@@ -7,6 +7,7 @@ public class Main {
     }
 }
 /*TODO:
-
-
+   Collision
+   lava
+   water
 */
