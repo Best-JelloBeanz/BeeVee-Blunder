@@ -13,17 +13,21 @@ public class Tile {
     protected int width, height;
 
     protected Tile() {
+        width = 32;
+        height = 32;
         initHitblox();
     }
-    public void drawHitblox(Graphics g) {
+    public void drawHitblox(Graphics g, int x, int y) {
         //Debugging hitbox
+        hitblox.x = x;
+        hitblox.y = y;
         g.setColor(Color.black);
         g.drawRect(hitblox.x, hitblox.y, hitblox.width, hitblox.height);
 
     }
     /*
-    public void isCollidingHitblox(Entity rec1, Tile rec2) {
-        if (rec1.hitbox.intersects())
+    public void collision(Entity rec1, Tile rec2) {
+        if (tileNum == 1)
     }
      */
     public void initHitblox() {

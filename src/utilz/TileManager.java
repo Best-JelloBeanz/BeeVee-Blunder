@@ -86,7 +86,8 @@ public class TileManager {
             if (tileNum > 0) {
                 g2.drawImage(tile[tileNum].image, worldX, worldY, gp.tileSize, gp.tileSize, null);
                 if (gp.keyI.hitboxVisible) {
-                    e[worldCol][worldRow].draw(g2);
+                    //e[worldCol][worldRow].draw(g2);
+                    tile[tileNum].drawHitblox(g2, worldX, worldY);
                 }
             }
             worldCol++;

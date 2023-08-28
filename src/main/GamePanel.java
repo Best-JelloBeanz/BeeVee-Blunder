@@ -16,7 +16,7 @@ public class GamePanel extends JPanel{
     public float deltaTime;
     MouseInputs mouseI = new MouseInputs();
     public KeyboardInputs keyI = new KeyboardInputs();
-    public Player player = new Player(this, keyI, 0, 0, 25, 30);
+    public Player player = new Player(this, keyI, 0, 0, 25, 32);
     public TileManager tileM = new TileManager(this);
     public Block block = new Block(this, 200, 200, 32, 32);
     public GamePanel() {

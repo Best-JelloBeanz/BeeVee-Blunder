@@ -178,6 +178,25 @@ public class Player extends Entity{
             }
         }
     }
+
+    /*
+    public void newTileCollision() {
+        int worldCol = 0;
+        int worldRow = 0;
+        //Loops through the map, and acquires the data from it
+        Player a = gp.player;
+        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
+            int tileNum = gp.tileM.mapTileNum[worldCol][worldRow];
+            Block b = gp.tileM.e[worldCol][worldRow];
+            worldCol++;
+            if (worldCol == gp.maxWorldCol) {
+                worldRow++;
+                worldCol = 0;
+            }
+            b.collision(a, tileNum,
+        }
+    }
+     */
     //Updates the player when called
     public void update(float deltaTime) {
         updatePos(deltaTime);
