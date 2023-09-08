@@ -3,6 +3,11 @@ import entities.Entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class Tile {
@@ -13,7 +18,7 @@ public class Tile {
     public float x, y;
     protected int width, height;
 
-    protected Tile() {
+    protected Tile(int x, int y) {
         width = 32;
         height = 32;
         initHitblox();
@@ -31,6 +36,13 @@ public class Tile {
         if (tileNum == 1)
     }
      */
+    protected void importImg(String img) {
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(img)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void initHitblox() {
         hitblox = new Rectangle((int) x, (int) y, width, height);
     }

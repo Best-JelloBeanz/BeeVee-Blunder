@@ -67,6 +67,8 @@ public class TileManager {
                     //Creates a hitbox for each tile
                     //e[col][row] = new Block(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                     switch(num) {
+                        case(0) -> tile[col][row] = new AirTile();
+                        case(1) -> tile[col][row] = new GrassTile();
                         case(2) -> tile[col][row] = new BrickTile();
                     }
                     col++;
