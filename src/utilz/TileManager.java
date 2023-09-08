@@ -14,17 +14,19 @@ import java.util.Objects;
 //Original by RYI Snow (Modified)
 public class TileManager {
     GamePanel gp;
-    public Tile[] tile;
+    public Tile[][] tile;
     public int[][] mapTileNum;
     public Block[][] e;
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[10];
+        tile = new Tile[gp.maxWorldCol][gp.maxWorldRow];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         e = new Block[gp.maxWorldCol][gp.maxWorldRow];
-        getTileImage();
+        //getTileImage();
         loadMap("/res/maps/map02.txt");
     }
+
+    /*
     public void getTileImage() {
         try {
             //This tile is never used, it's just a placeholder for air
@@ -47,6 +49,8 @@ public class TileManager {
             e.printStackTrace();
         }
     }
+
+     */
     public void loadMap(String filepath) {
         try {
             InputStream is = getClass().getResourceAsStream(filepath);
@@ -61,7 +65,10 @@ public class TileManager {
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     //Creates a hitbox for each tile
-                    e[col][row] = new Block(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                    //e[col][row] = new Block(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                    switch(num) {
+                        case(2) -> tile[col][row] = new BrickTile();
+                    }
                     col++;
                 }
                 if (col == gp.maxWorldCol) {
