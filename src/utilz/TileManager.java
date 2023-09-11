@@ -16,12 +16,10 @@ public class TileManager {
     GamePanel gp;
     public Tile[][] tile;
     public int[][] mapTileNum;
-    public Block[][] e;
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[gp.maxWorldCol][gp.maxWorldRow];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
-        e = new Block[gp.maxWorldCol][gp.maxWorldRow];
         //getTileImage();
         loadMap("/res/maps/map02.txt");
     }
@@ -67,9 +65,9 @@ public class TileManager {
                     //Creates a hitbox for each tile
                     //e[col][row] = new Block(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                     switch(num) {
-                        case(0) -> tile[col][row] = new AirTile();
-                        case(1) -> tile[col][row] = new GrassTile();
-                        case(2) -> tile[col][row] = new BrickTile();
+                        case(0) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(1) -> tile[col][row] = new GrassTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(2) -> tile[col][row] = new BrickTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                     }
                     col++;
                 }
@@ -93,10 +91,11 @@ public class TileManager {
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
             if (tileNum > 0) {
-                g2.drawImage(tile[tileNum].image, worldX, worldY, gp.tileSize, gp.tileSize, null);
+                tile[worldCol][worldRow].draw(g2);
+                //g2.drawImage(tile[tileNum].image, worldX, worldY, gp.tileSize, gp.tileSize, null);
                 if (gp.keyI.hitboxVisible) {
                     //e[worldCol][worldRow].draw(g2);
-                    tile[tileNum].drawHitblox(g2, worldX, worldY);
+                    //tile[worldCol[worldRow]
                 }
             }
             worldCol++;

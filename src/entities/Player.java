@@ -1,6 +1,7 @@
 package entities;
 import main.GamePanel;
 import inputs.KeyboardInputs;
+import utilz.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -131,7 +132,7 @@ public class Player extends Entity{
         Player a = gp.player;
         while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
             int tileNum = gp.tileM.mapTileNum[worldCol][worldRow];
-            Block b = gp.tileM.e[worldCol][worldRow];
+            Tile b = gp.tileM.tile[worldCol][worldRow];
             worldCol++;
             if (worldCol == gp.maxWorldCol) {
                 worldRow++;
@@ -201,7 +202,7 @@ public class Player extends Entity{
     public void update(float deltaTime) {
         updatePos(deltaTime);
         updateHitbox();
-        TileCollision();
+        //TileCollision();
         isColliding(gp.player, gp.block);
 
     }

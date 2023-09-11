@@ -1,54 +1,69 @@
 package utilz;
-import entities.Entity;
+import inputs.KeyboardInputs;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
+
 public class Tile {
+    KeyboardInputs keyI;
 
     public BufferedImage image;
-    public Rectangle hitblox;
+    public Rectangle hitbox;
     public boolean collision = false;
     public float x, y;
-    protected int width, height;
+    public int width, height;
 
-    protected Tile(int x, int y) {
-        width = 32;
-        height = 32;
-        initHitblox();
-    }
-    public void drawHitblox(Graphics g, int x, int y) {
-        //Debugging hitbox
-        hitblox.x = x;
-        hitblox.y = y;
-        g.setColor(Color.black);
-        g.drawRect(hitblox.x, hitblox.y, hitblox.width, hitblox.height);
+    protected Tile(float x, float y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
 
+        initHitbox();
     }
+
     /*
     public void collision(Entity rec1, Tile rec2) {
         if (tileNum == 1)
     }
      */
     protected void importImg(String img) {
+        InputStream i = getClass().getResourceAsStream(img);
+        //image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(img)));
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(img)));
+            assert i != null;
+            image = ImageIO.read(i);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void initHitblox() {
-        hitblox = new Rectangle((int) x, (int) y, width, height);
+    public void initHitbox() {
+        hitbox = new Rectangle((int) x, (int) y, width, height);
     }
 
     protected void updateHitbox() {
-        hitblox.x = (int) x + 3;
-        hitblox.y = (int) y + 1;
+        hitbox.x = (int) x + 3;
+        hitbox.y = (int) y + 1;
+    }
+
+    public void draw(Graphics2D g2) {
+        g2.drawImage(image, (int)x, (int)y, null);
+        if (keyI.hitboxVisible) {
+            drawHitbox(g2);
+        }
+    }
+
+    void drawHitbox(Graphics g) {
+        hitbox.x = (int) x;
+        hitbox.y = (int) y;
+        g.setColor(Color.black);
+        g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+
     }
 }
