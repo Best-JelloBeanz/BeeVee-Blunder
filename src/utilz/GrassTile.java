@@ -16,12 +16,11 @@ public class GrassTile extends Tile{
         this.height = height;
         this.keyI = keyI;
         initHitbox();
-        importImg("res/tiles/grass.png");
+        importImg("/res/tiles/grass.png");
     }
 
     public void draw(Graphics2D g2) {
         g2.drawImage(image, (int)x, (int)y, null);
-
     }
 
 }

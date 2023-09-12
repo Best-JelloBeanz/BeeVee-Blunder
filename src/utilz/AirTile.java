@@ -15,16 +15,13 @@ public class AirTile extends Tile{
         this.width = width;
         this.height = height;
         this.keyI = keyI;
-        importImg("res/tiles/grass.png");
+        importImg("/res/tiles/grass.png");
         initHitbox();
 
     }
 
     public void draw(Graphics2D g2) {
         g2.drawImage(image, (int)x, (int)y, null);
-        if (keyI.hitboxVisible) {
-            drawHitbox(g2);
-        }
     }
 
 }

@@ -18,8 +18,7 @@ public class BrickTile extends Tile{
         this.height = height;
         this.keyI = keyI;
         initHitbox();
-        importImg("res/tiles/bricks.png");
-        System.out.println("Bricks");
+        importImg("/res/tiles/bricks.png");
 
     }
     public void draw(Graphics2D g2) {

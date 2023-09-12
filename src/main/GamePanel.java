@@ -17,7 +17,7 @@ public class GamePanel extends JPanel{
     MouseInputs mouseI = new MouseInputs();
     public KeyboardInputs keyI = new KeyboardInputs();
     public Player player = new Player(this, keyI, 0, 0, 25, 32);
-    public TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this, keyI);
     public Block block = new Block(this, 200, 200, 32, 32);
     public GamePanel() {
         this.addKeyListener(keyI);

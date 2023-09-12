@@ -17,8 +17,9 @@ public class TileManager {
     GamePanel gp;
     public Tile[][] tile;
     public int[][] mapTileNum;
-    public TileManager(GamePanel gp) {
+    public TileManager(GamePanel gp, KeyboardInputs keyI) {
         this.gp = gp;
+        this.keyI = keyI;
         tile = new Tile[gp.maxWorldCol][gp.maxWorldRow];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         loadMap("/res/maps/map02.txt");
