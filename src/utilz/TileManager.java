@@ -42,6 +42,13 @@ public class TileManager {
                         case(0) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                         case(1) -> tile[col][row] = new GrassTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                         case(2) -> tile[col][row] = new BrickTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(3) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(4) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(5) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(6) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(7) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(8) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(9) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                     }
                     col++;
                 }
@@ -65,7 +72,9 @@ public class TileManager {
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
             if (tileNum > 0) {
-                tile[worldCol][worldRow].draw(g2);
+                if (tile[worldCol][worldRow] != null) {
+                    tile[worldCol][worldRow].draw(g2);
+                }
             }
             worldCol++;
             if (worldCol == gp.maxWorldCol) {
