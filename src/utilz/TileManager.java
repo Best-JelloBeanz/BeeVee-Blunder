@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
-//Original by RYI Snow (Modified)
+
 public class TileManager {
     GamePanel gp;
     public Tile[][] tile;
@@ -36,19 +36,12 @@ public class TileManager {
                     String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
-                    //Creates a hitbox for each tile
-                    //e[col][row] = new Block(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                    //Generates a subclass of 
                     switch(num) {
                         case(0) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                         case(1) -> tile[col][row] = new GrassTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                         case(2) -> tile[col][row] = new BrickTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(3) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(4) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(5) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(6) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(7) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(8) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(9) -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        default -> tile[col][row] = new AirTile(gp, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                     }
                     col++;
                 }
