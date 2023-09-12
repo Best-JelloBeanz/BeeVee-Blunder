@@ -20,35 +20,9 @@ public class TileManager {
         this.gp = gp;
         tile = new Tile[gp.maxWorldCol][gp.maxWorldRow];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
-        //getTileImage();
         loadMap("/res/maps/map02.txt");
     }
 
-    /*
-    public void getTileImage() {
-        try {
-            //This tile is never used, it's just a placeholder for air
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/grass.png")));
-
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/grass.png")));
-
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/bricks.png")));
-            tile[2].collision = true;
-
-            tile[3] = new Tile();
-            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/water.png")));
-
-            tile[4] = new Tile();
-            tile[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/lava.png")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-     */
     public void loadMap(String filepath) {
         try {
             InputStream is = getClass().getResourceAsStream(filepath);
@@ -92,11 +66,6 @@ public class TileManager {
             int worldY = worldRow * gp.tileSize;
             if (tileNum > 0) {
                 tile[worldCol][worldRow].draw(g2);
-                //g2.drawImage(tile[tileNum].image, worldX, worldY, gp.tileSize, gp.tileSize, null);
-                if (gp.keyI.hitboxVisible) {
-                    //e[worldCol][worldRow].draw(g2);
-                    //tile[worldCol[worldRow]
-                }
             }
             worldCol++;
             if (worldCol == gp.maxWorldCol) {
