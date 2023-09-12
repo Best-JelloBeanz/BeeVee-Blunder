@@ -1,5 +1,6 @@
 package utilz;
 import inputs.KeyboardInputs;
+import main.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,6 +13,7 @@ import java.io.InputStreamReader;
 
 public class Tile {
     KeyboardInputs keyI;
+    GamePanel gp;
 
     public BufferedImage image;
     public Rectangle hitbox;
@@ -24,8 +26,8 @@ public class Tile {
         this.y = y;
         this.width = width;
         this.height = height;
-
         initHitbox();
+        //importImg("res/tiles/grass.png");
     }
 
     /*
@@ -41,6 +43,13 @@ public class Tile {
             image = ImageIO.read(i);
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                assert i != null;
+                i.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
     public void initHitbox() {
@@ -54,9 +63,12 @@ public class Tile {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(image, (int)x, (int)y, null);
+        /*
         if (keyI.hitboxVisible) {
             drawHitbox(g2);
         }
+
+         */
     }
 
     void drawHitbox(Graphics g) {
