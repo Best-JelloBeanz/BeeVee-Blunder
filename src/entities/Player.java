@@ -202,7 +202,7 @@ public class Player extends Entity{
     public void update(float deltaTime) {
         updatePos(deltaTime);
         updateHitbox();
-        //TileCollision();
+        TileCollision();
         isColliding(gp.player, gp.block);
 
     }

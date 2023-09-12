@@ -40,10 +40,10 @@ public class TileManager {
                     mapTileNum[col][row] = num;
                     //Generates a subclass of Tile(), differing depending on the value.
                     switch(num) {
-                        case(0) -> tile[col][row] = new AirTile(keyI, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(1) -> tile[col][row] = new GrassTile(keyI, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        case(2) -> tile[col][row] = new BrickTile(keyI, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
-                        default -> tile[col][row] = new AirTile(keyI, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(0) -> tile[col][row] = new AirTile(gp, keyI, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(1) -> tile[col][row] = new GrassTile(gp, keyI, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        case(2) -> tile[col][row] = new BrickTile(gp, keyI, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
+                        default -> tile[col][row] = new AirTile(gp, keyI, (float) col * gp.tileSize, (float) row * gp.tileSize, gp.tileSize, gp.tileSize);
                         // Generates an air tile if an unexpected value is detected.
                     }
                     col++;
