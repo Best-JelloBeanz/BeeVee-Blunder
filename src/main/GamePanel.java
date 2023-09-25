@@ -7,6 +7,8 @@ import utilz.TileManager;
 import javax.swing.JPanel;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
+
+
 public class GamePanel extends JPanel{
     final int originalTileSize = 16;
     final int scale = 2;
@@ -15,10 +17,15 @@ public class GamePanel extends JPanel{
     public final int maxWorldRow = 30;
     public float deltaTime;
     MouseInputs mouseI = new MouseInputs();
-    public KeyboardInputs keyI = new KeyboardInputs();
+    public KeyboardInputs keyI = new KeyboardInputs(this);
     public Player player = new Player(this, keyI, 0, 0, 25, 32);
     public TileManager tileM = new TileManager(this, keyI);
     public Block block = new Block(this, 200, 200, 32, 32);
+
+    // GAME STATE
+    public int gameState = 1;
+    public final int playState = 1;
+    public final int pauseState = 2;
     public GamePanel() {
         this.addKeyListener(keyI);
         this.addMouseListener(mouseI);
@@ -26,7 +33,12 @@ public class GamePanel extends JPanel{
     }
 
     public void updateGame() {
-        player.update(deltaTime);
+        if (gameState == playState) {
+            player.update(deltaTime);
+        }
+        if (gameState == pauseState) {
+            //nothing
+        }
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

@@ -29,7 +29,7 @@ public class Player extends Entity{
     public void setDefaultValues() {
         x = 100;
         y = 100;
-        accelerationY = 100f;
+        accelerationY = 200f;
         accelerationX = 350f;
         deceleration = 400f;
         maxVelocityX = 200;
