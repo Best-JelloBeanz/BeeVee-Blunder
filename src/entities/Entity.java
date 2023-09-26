@@ -7,9 +7,8 @@ import java.awt.image.BufferedImage;
 public abstract class Entity {
     public float x, y, velocityX, velocityY, accelerationY, accelerationX, deceleration;
     public float maxVelocityY, maxVelocityX;
-    protected int width, height;
-    public boolean canMoveLeft = true;
-    public boolean canMoveRight = true;
+    protected int width, height, scale;
+    public boolean canMoveLeft, canMoveRight, canMoveUp, canMoveDown = true;
     public Rectangle hitbox;
     public BufferedImage right, left;
     public String direction;
@@ -19,15 +18,15 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
-        initHitbox();
+        initHitbox(width, height);
     }
     public void drawHitbox(Graphics g) {
         //Debugging hitbox
         g.setColor(Color.red);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
-    public void initHitbox() {
-        hitbox = new Rectangle((int) x, (int) y, width, height);
+    public void initHitbox(int hitWidth, int hitHeight) {
+        hitbox = new Rectangle((int) x, (int) y, hitWidth * scale, hitHeight * scale);
     }
     protected void updateHitbox() {
         hitbox.x = (int) x + 3;

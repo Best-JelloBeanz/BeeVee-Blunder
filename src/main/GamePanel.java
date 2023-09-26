@@ -11,14 +11,14 @@ import java.awt.Graphics;
 
 public class GamePanel extends JPanel{
     final int originalTileSize = 16;
-    final int scale = 2;
+    final int scale = 1;
     public final int tileSize = originalTileSize * scale;
     public final int maxWorldCol = 30;
     public final int maxWorldRow = 30;
     public float deltaTime;
     MouseInputs mouseI = new MouseInputs();
     public KeyboardInputs keyI = new KeyboardInputs(this);
-    public Player player = new Player(this, keyI, 0, 0, 25, 32);
+    public Player player = new Player(this, keyI, 0, 0, 16, 16, scale);
     public TileManager tileM = new TileManager(this, keyI);
     public Block block = new Block(this, 200, 200, 32, 32);
 

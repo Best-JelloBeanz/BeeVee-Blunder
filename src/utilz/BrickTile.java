@@ -1,5 +1,6 @@
 package utilz;
 
+import entities.Player;
 import inputs.KeyboardInputs;
 import main.GamePanel;
 
@@ -10,8 +11,8 @@ public class BrickTile extends Tile{
     KeyboardInputs keyI;
 
     GamePanel gp;
-    protected BrickTile(GamePanel gp, KeyboardInputs keyI, float x, float y, int width, int height) {
-        super(x, y, width, height);
+    protected BrickTile(GamePanel gp, KeyboardInputs keyI, int col, int row, int width, int height) {
+        super(col, row, width, height);
         this.keyI = keyI;
         this.gp = gp;
         initHitbox();
@@ -24,4 +25,11 @@ public class BrickTile extends Tile{
             drawHitbox(g2);
         }
     }
+    /*
+    public void collision() {
+        Player a = gp.player;
+        this = b;
+    }
+
+     */
 }

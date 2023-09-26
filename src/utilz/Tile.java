@@ -20,12 +20,15 @@ public class Tile {
     public boolean collision = false;
     public float x, y;
     public int width, height;
+    public int col, row;
 
-    protected Tile(float x, float y, int width, int height) {
-        this.x = x;
-        this.y = y;
+    protected Tile(int col, int row, int width, int height) {
+        this.col = col;
+        this.row = row;
         this.width = width;
         this.height = height;
+        x = col * width;
+        y = row * height;
         initHitbox();
         //importImg("res/tiles/grass.png");
     }

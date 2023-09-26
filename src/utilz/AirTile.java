@@ -8,8 +8,8 @@ import java.awt.*;
 public class AirTile extends Tile{
     KeyboardInputs keyI;
     GamePanel gp;
-    protected AirTile(GamePanel gp, KeyboardInputs keyI, float x, float y, int width, int height) {
-        super(x, y, width, height);
+    protected AirTile(GamePanel gp, KeyboardInputs keyI, int col, int row, int width, int height) {
+        super(col, row, width, height);
         this.keyI = keyI;
         this.gp = gp;
         importImg("/res/tiles/grass.png");

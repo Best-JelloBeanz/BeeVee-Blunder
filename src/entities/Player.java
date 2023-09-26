@@ -13,17 +13,18 @@ public class Player extends Entity{
     KeyboardInputs keyI;
     GamePanel gp;
     //The Player constructor
-    public Player(GamePanel gp, KeyboardInputs keyI, float x, float y, int width, int height) {
+    public Player(GamePanel gp, KeyboardInputs keyI, float x, float y, int width, int height, int scale) {
         super(x, y, width, height);
         //I know how this works and why I need this, but I can't describe it very well.
         this.gp = gp;
         //Loads keyboard input functionality
         this.keyI = keyI;
+        this.scale = scale;
         setDefaultValues();
         //Loads the player sprites
         importImg();
         //Creates a new instance of hitbox for the player to use
-        initHitbox();
+        initHitbox(13, 16);
     }
     //Only needs to be called once, gives initial values for the player to spawn with
     public void setDefaultValues() {
@@ -66,8 +67,10 @@ public class Player extends Entity{
             velocityY -= 1.5 * accelerationY * deltaTime;
         }
         else {
-            if (velocityY < 0) {
-                velocityY += 1.5 * accelerationY * deltaTime;
+            if(!canMoveDown) {
+                if (velocityY < 0) {
+                    velocityY += 1.5 * accelerationY * deltaTime;
+                }
             }
             velocityY += accelerationY * deltaTime;
             //If not exceeding maximum velocity in the up or down directions
@@ -166,6 +169,7 @@ public class Player extends Entity{
             //If tile is brick
             if (tileNum == 2) {
                 if (a.hitbox.intersects(b.hitbox)) {
+                    canMoveDown = false;
                     //If colliding, and not standing on the tile
                     if (a.y > b.y - a.height) {
                         a.y = b.y - a.height;
@@ -175,6 +179,9 @@ public class Player extends Entity{
                         a.velocityY = 0;
                     }
                     //Does not reset if velocity goes upwards to make jumping possible
+                }
+                else {
+                    canMoveDown = true;
                 }
             }
         }
@@ -213,7 +220,7 @@ public class Player extends Entity{
             case "right" -> img = right;
             case "left" -> img = left;
         }
-        g2.drawImage(img, (int)x, (int)y, null);
+        g2.drawImage(img, (int)x, (int)y, width * scale, height * scale, null);
         //Debug hitbox
         if (keyI.hitboxVisible) {
             drawHitbox(g2);

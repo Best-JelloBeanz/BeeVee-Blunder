@@ -7,7 +7,7 @@ public class Block extends Entity{
     public Block(GamePanel gp, float x, float y, int width, int height) {
         super(x, y, width, height);
         this.gp = gp;
-        initHitbox();
+        initHitbox(width, height);
     }
     public void setDefaultValues() {
         x = 200;
