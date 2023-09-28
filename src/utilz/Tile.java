@@ -1,4 +1,6 @@
 package utilz;
+import entities.Entity;
+import entities.Player;
 import inputs.KeyboardInputs;
 import main.GamePanel;
 
@@ -66,12 +68,6 @@ public class Tile {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(image, (int)x, (int)y, gp.tileSize, gp.tileSize, null);
-        /*
-        if (keyI.hitboxVisible) {
-            drawHitbox(g2);
-        }
-
-         */
     }
 
     void drawHitbox(Graphics g) {
@@ -80,5 +76,8 @@ public class Tile {
         g.setColor(Color.black);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 
+    }
+
+    public void collision(Entity a) {
     }
 }

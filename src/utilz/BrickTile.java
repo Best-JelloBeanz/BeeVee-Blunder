@@ -1,6 +1,6 @@
 package utilz;
 
-import entities.Player;
+import entities.Entity;
 import inputs.KeyboardInputs;
 import main.GamePanel;
 
@@ -25,11 +25,22 @@ public class BrickTile extends Tile{
             drawHitbox(g2);
         }
     }
-    /*
-    public void collision() {
-        Player a = gp.player;
-        this = b;
+
+    public void collision(Entity a) {
+        Tile b = gp.tileM.tile[col][row];
+        if (a.hitbox.intersects(b.hitbox)) {
+            //If colliding, and not standing on the tile
+            if (a.y > b.y - a.height) {
+
+                a.y = b.hitbox.y - a.height;
+            }
+            //Resets velocity so momentum is not carried when walking off
+            if (a.velocityY > 0) {
+                a.velocityY = 0;
+            }
+            //Does not reset if velocity goes upwards to make jumping possible
+        }
     }
 
-     */
+
 }
